@@ -175,3 +175,23 @@ dialog::backdrop { background: rgba(0, 0, 0, 0.6); }
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.4); opacity: 0; pointer-events: none; transition: 0.25s; z-index: 10;
 }
 #bildirim.gorunur { opacity: 1; transform: translate(-50%, 0); }
+
+/* Yatay telefon: yükseklik az, kontroller sıkışır; sahneye yer kalır. */
+@media (orientation: landscape) and (max-height: 520px) {
+  .okuyucu { max-width: none; }
+  .oku-ust { padding-top: 2px; padding-bottom: 0; }
+  .oku-ust .simge { height: 36px; }
+  .rsvp { flex-basis: 120px; }
+  .ipucu { display: none; }
+  .panel { font-size: 1rem; line-height: 1.6; padding: 4px 28px 14px; }
+  .oku-alt {
+    display: grid; grid-template-columns: 1fr auto; align-items: center; column-gap: 16px;
+    padding: 2px 20px calc(4px + env(safe-area-inset-bottom));
+  }
+  #kaydir { grid-column: 1; grid-row: 1; margin: 0; }
+  .ilerleme-bilgi { grid-column: 2; grid-row: 1; white-space: nowrap; }
+  .kontroller { grid-column: 1; grid-row: 2; justify-content: flex-start; margin: 0; gap: 10px; }
+  .hiz { grid-column: 2; grid-row: 2; }
+  .kontrol { width: 42px; height: 42px; font-size: 1.1rem; }
+  .kontrol.oynat { width: 50px; height: 50px; font-size: 1.2rem; }
+}
