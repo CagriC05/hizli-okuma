@@ -113,9 +113,26 @@ async function paylasilaniAl() {
 
 // ---- Kitaplık ----
 
+// İlk açılışta kendini anlatan örnek kitap eklenir; silinirse bir daha kendiliğinden gelmez.
+const ORNEK = 'hizli-okuma-ornek-eklendi';
+
+async function ornekEkle() {
+  const y = await fetch('ornek.epub');
+  if (!y.ok) throw new Error('Örnek kitap indirilemedi.');
+  const k = await iceAktar([new File([await y.blob()], 'ornek.epub')]);
+  try { localStorage.setItem(ORNEK, '1'); } catch {}
+  return k;
+}
+
 async function kitaplik() {
   document.body.className = '';
-  const ozet = await kitapOzetleri().catch(() => []);
+  let ozet = await kitapOzetleri().catch(() => []);
+  let ilkKez = false;
+  try { ilkKez = !ozet.length && !localStorage.getItem(ORNEK); } catch {}
+  if (ilkKez) {
+    await ornekEkle().catch(() => {});
+    ozet = await kitapOzetleri().catch(() => []);
+  }
   const ist = istatistik();
   const ortHiz = ist.toplam.ms > 0 ? ist.toplam.kelime / (ist.toplam.ms / 60000) : 0;
   kok.innerHTML = `
@@ -132,7 +149,8 @@ async function kitaplik() {
     <div id="liste">${ozet.length ? ozet.map(kitapKarti).join('') : `
       <div class="bos"><p><strong>Kitaplık boş.</strong></p>
       <p class="soluk">Bir EPUB ekle; kelimeler ekranın ortasında tek tek akar, göz satır boyunca gezmez.
-      Durdurunca bulunduğun paragraf açılır, istediğin kelimeye dokunup oradan devam edersin.</p></div>`}
+      Durdurunca bulunduğun paragraf açılır, istediğin kelimeye dokunup oradan devam edersin.</p>
+      <button class="dugme" id="ornekEkle">Örnek kitabı ekle</button></div>`}
     </div>`;
 
   $('#dosya').onchange = async (e) => {
@@ -141,6 +159,8 @@ async function kitaplik() {
     if (k) kitaplik();
   };
   $('#ayarAc').onclick = () => ayarKutusu();
+  const ornekDugme = $('#ornekEkle');
+  if (ornekDugme) ornekDugme.onclick = () => ornekEkle().then(kitaplik, (e) => bildir(e.message));
   $('#liste').onclick = async (e) => {
     const kart = e.target.closest('[data-id]');
     if (!kart) return;

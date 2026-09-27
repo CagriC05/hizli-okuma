@@ -25,6 +25,11 @@ Klavye: boşluk başlat/durdur · ←/→ cümle · Shift+←/→ paragraf · �
 
 ## Kitap ekleme
 
+İlk açılışta kitaplıkta **Gözün Durduğu Yer** adlı kısa bir örnek kitap bulunur: uygulamanın nasıl
+kullanılacağını anlatır; dipnot ve sayfa numarası içerdiği için temizleme kurallarını da gösterir.
+Silinirse bir daha kendiliğinden eklenmez; kitaplık boşken "Örnek kitabı ekle" ile geri gelir.
+Kitap `araclar/ornek_kitap.py` ile üretilir.
+
 "＋ EPUB ekle" ile dosya seçilir. Uygulama telefona kurulduysa dosya yöneticisinde EPUB'a uzun basıp
 **Paylaş → Hızlı Okuma** da çalışır (Android). DRM'li (şifreli) EPUB'lar açılmaz.
 
@@ -49,6 +54,7 @@ Sonra `http://localhost:8090`. Çevrimdışı çalışma, "ana ekrana ekle" ve p
 | `metin.js` | Kelimelere bölme, göreli süre, odak harfi, cümle/paragraf sınırları, kalan süre |
 | `depo.js` | Kitaplar IndexedDB'de; konum, ayar ve günlük istatistik localStorage'da |
 | `app.js` | Yönlendirme, kitaplık, okuyucu döngüsü, paragraf paneli, bölüm ve ayar kutuları |
+| `ornek.epub`, `araclar/ornek_kitap.py` | Örnek kitap ve onu üreten betik |
 | `sw.js` | Çevrimdışı önbellek ve Android paylaşım hedefi |
 | `styles.css` | Mobil öncelikli koyu tema |
 

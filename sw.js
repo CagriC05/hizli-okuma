@@ -1,12 +1,12 @@
 // Çevrimdışı çalışma: uygulama kabuğunu önbelleğe al, ağ varsa tazele.
 // Ayrıca Android "Paylaş" hedefi: gelen EPUB'ı önbelleğe bırakıp uygulamaya yönlendir.
 const ON_EK = 'hizli-okuma-v';
-const AD = 'hizli-okuma-v1';
+const AD = 'hizli-okuma-v2';
 const PAYLASIM = 'hizli-okuma-paylasim';
 const DOSYALAR = [
   './', './index.html', './styles.css',
   './app.js', './epub.js', './metin.js', './depo.js',
-  './manifest.json', './icons/icon-192.png', './icons/icon-512.png',
+  './ornek.epub', './manifest.json', './icons/icon-192.png', './icons/icon-512.png',
 ];
 
 self.addEventListener('install', (e) => {
