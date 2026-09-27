@@ -9,14 +9,13 @@ export function goreliSure(k, ayar) {
   const saf = k.replace(/[^\p{L}\p{N}]/gu, '');
   const n = saf.length;
   let f = 1;
-  if (ayar.uzunYavas) {
-    if (n <= 3) f = 0.85;
-    else if (n > 7) f += Math.min(0.6, (n - 7) * 0.07);
-  }
+  // Tanıma süresi harf sayısıyla aşağı yukarı doğrusal artar: 6 harf = 1, her harf ±%7.5.
+  // (3 harf 0.78, 12 harf 1.45, 20 harf 2.05; üst sınır 2.4.) Türkçe ortalama kelime ~6 harf.
+  if (ayar.uzunYavas) f = Math.min(2.4, Math.max(0.7, 0.55 + 0.075 * n));
   if (/\d/.test(saf)) f += 0.3;
   const d = ayar.duraklama; // 0: kapalı, 1: az, 2: orta, 3: çok
-  if (CUMLE_SONU.test(k)) f += 0.6 * d;
-  else if (ARA_NOKTALAMA.test(k)) f += 0.25 * d;
+  if (CUMLE_SONU.test(k)) f += 0.4 * d;
+  else if (ARA_NOKTALAMA.test(k)) f += 0.2 * d;
   return f;
 }
 
@@ -65,7 +64,7 @@ export function sureleriHesapla(m, kitap, ayar) {
     let f = goreliSure(m.kelimeler[i], ayar);
     const p = m.kelPar[i];
     const parSonu = i === m.N - 1 || m.kelPar[i + 1] !== p;
-    if (parSonu) f += 0.5 * ayar.duraklama + (kitap.paragraflar[p].b ? 1 : 0);
+    if (parSonu) f += 0.3 * ayar.duraklama + (kitap.paragraflar[p].b ? 1 : 0);
     s[i] = f;
     top += f;
   }

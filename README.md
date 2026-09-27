@@ -8,7 +8,7 @@ ortasında tek tek akar, göz satır boyunca gezmez. Bağımlılıksız PWA: der
 
 - **Odak harfi (ORP):** Her kelimenin tanıma noktası (uzunluğa göre 1.–5. harf) kırmızı ve hep aynı
   noktada durur; kelime ona göre kaydırılır. Taşan uzun kelimeler küçültülür.
-- **Akıllı süre:** Uzun kelime, sayı, virgül, nokta ve paragraf sonu biraz daha uzun kalır.
+- **Akıllı süre:** Kelime harf sayısıyla orantılı kalır (12 harf ≈ 5 harfin 1,5 katı); sayı, virgül, nokta ve paragraf sonu biraz daha uzun kalır.
   Süreler kitap genelinde normalize edilir; 400 kel/dk seçildiyse kitap gerçekten ~400 ile akar.
 - **Yumuşak başlangıç:** Başlatınca ilk birkaç kelime yavaştan hızlanır.
 - **Durunca paragraf:** Durdurunca bulunduğun paragraf (öncesi ve sonrasıyla) açılır, okunan kelime

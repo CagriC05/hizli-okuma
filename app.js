@@ -504,7 +504,7 @@ function ayarKutusu() {
     <div class="alan"><span>Noktalamada duraklama</span>
       <div class="secimler">${secim('duraklama', ayar.duraklama, [[0, 'Yok'], [1, 'Az'], [2, 'Orta'], [3, 'Çok']])}</div></div>
     ${anahtar('odakRenk', 'Odak harfini renklendir')}
-    ${anahtar('uzunYavas', 'Kelime uzunluğuna göre süre', 'Uzun kelimeler biraz uzun, kısa kelimeler biraz kısa kalır; ortalama hız değişmez.')}
+    ${anahtar('uzunYavas', 'Kelime uzunluğuna göre süre', 'Kelime harf sayısıyla orantılı kalır: 12 harfli kelime 5 harfliden ~1,5 kat uzun. Ortalama hız değişmez.')}
     ${anahtar('cumleBasi', 'Devam ederken cümle başından al', 'Durup başlatınca yarım kalan cümleyi baştan okursun.')}
     ${anahtar('yumusak', 'Yumuşak başlangıç', 'Başlatınca ilk birkaç kelime yavaş gelir, göz uyum sağlar.')}
     ${anahtar('onizleme', 'Sıradaki kelimeleri soluk göster')}
