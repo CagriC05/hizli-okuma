@@ -13,6 +13,7 @@ const $ = (s, k = document) => k.querySelector(s);
 const kok = $('#uygulama');
 const kutu = $('#kutu');
 const HIZ_MIN = 100, HIZ_MAX = 1000, HIZ_ADIM = 25;
+const BOY_MIN = 24, BOY_MAX = 72, BOY_ADIM = 4;
 
 let ayar = ayarlar();
 
@@ -236,6 +237,9 @@ async function okuyucuAc(id) {
           <button class="kontrol" data-git="sp" aria-label="Sonraki paragraf">⇥</button>
         </div>
         <div class="hiz">
+          <button class="simge boy kucuk-a" data-boy="-1" aria-label="Yazıyı küçült">A</button>
+          <button class="simge boy buyuk-a" data-boy="1" aria-label="Yazıyı büyüt">A</button>
+          <span class="ayrac"></span>
           <button class="simge" data-hiz="-1" aria-label="Yavaşla">−</button>
           <button class="hiz-deger" id="hizDeger"></button>
           <button class="simge" data-hiz="1" aria-label="Hızlan">＋</button>
@@ -249,6 +253,7 @@ async function okuyucuAc(id) {
   $('#hizDeger').onclick = () => { durdur(); ayarKutusu(); };
   document.querySelectorAll('[data-git]').forEach((b) => { b.onclick = () => gezin(b.dataset.git); });
   document.querySelectorAll('[data-hiz]').forEach((b) => { b.onclick = () => hizDegis(+b.dataset.hiz * HIZ_ADIM); });
+  document.querySelectorAll('[data-boy]').forEach((b) => { b.onclick = () => boyDegis(+b.dataset.boy * BOY_ADIM); });
 
   const kaydir = $('#kaydir');
   kaydir.oninput = () => { durdur(); O.k = +kaydir.value; O.atlandi = true; ciz(); };
@@ -306,6 +311,13 @@ function hizDegis(d) {
   ayar.wpm = Math.max(HIZ_MIN, Math.min(HIZ_MAX, ayar.wpm + d));
   ayarKaydet(ayar);
   if (O) bilgiCiz();
+}
+
+function boyDegis(d) {
+  ayar.yaziBoyu = Math.max(BOY_MIN, Math.min(BOY_MAX, ayar.yaziBoyu + d));
+  ayarKaydet(ayar);
+  kelimeCiz();
+  bildir(`Yazı boyu ${ayar.yaziBoyu} px`, 1200);
 }
 
 // ---- Oynatma döngüsü ----
@@ -456,6 +468,9 @@ document.addEventListener('keydown', (e) => {
     ArrowRight: () => gezin(e.shiftKey ? 'sp' : 'sc'),
     ArrowUp: () => hizDegis(HIZ_ADIM),
     ArrowDown: () => hizDegis(-HIZ_ADIM),
+    '+': () => boyDegis(BOY_ADIM),
+    '=': () => boyDegis(BOY_ADIM),
+    '-': () => boyDegis(-BOY_ADIM),
     Escape: () => { location.hash = '#/'; },
   }[e.key];
   if (tus) { e.preventDefault(); tus(); }
@@ -499,7 +514,7 @@ function ayarKutusu() {
     <label class="alan"><span>Hız <b id="wpmY">${ayar.wpm}</b> kel/dk</span>
       <input type="range" name="wpm" min="${HIZ_MIN}" max="${HIZ_MAX}" step="${HIZ_ADIM}" value="${ayar.wpm}"></label>
     <label class="alan"><span>Yazı boyu <b id="boyY">${ayar.yaziBoyu}</b> px</span>
-      <input type="range" name="yaziBoyu" min="24" max="72" step="2" value="${ayar.yaziBoyu}"></label>
+      <input type="range" name="yaziBoyu" min="${BOY_MIN}" max="${BOY_MAX}" step="2" value="${ayar.yaziBoyu}"></label>
     <div class="ornek" id="ornek" style="font-size:${ayar.yaziBoyu}px">oku<b class="${ayar.odakRenk ? '' : 'renksiz'}">m</b>a</div>
     <div class="alan"><span>Noktalamada duraklama</span>
       <div class="secimler">${secim('duraklama', ayar.duraklama, [[0, 'Yok'], [1, 'Az'], [2, 'Orta'], [3, 'Çok']])}</div></div>
@@ -508,7 +523,7 @@ function ayarKutusu() {
     ${anahtar('cumleBasi', 'Devam ederken cümle başından al', 'Durup başlatınca yarım kalan cümleyi baştan okursun.')}
     ${anahtar('yumusak', 'Yumuşak başlangıç', 'Başlatınca ilk birkaç kelime yavaş gelir, göz uyum sağlar.')}
     ${anahtar('onizleme', 'Sıradaki kelimeleri soluk göster')}
-    <p class="soluk kucuk">Klavye: boşluk başlat/durdur · ←/→ cümle · Shift+←/→ paragraf · ↑/↓ hız</p>
+    <p class="soluk kucuk">Klavye: boşluk başlat/durdur · ←/→ cümle · Shift+←/→ paragraf · ↑/↓ hız · +/− yazı boyu</p>
   </form>`, (kt) => {
     const f = $('#ayarForm', kt);
     f.onsubmit = (e) => e.preventDefault();

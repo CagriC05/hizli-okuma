@@ -125,8 +125,12 @@ body.akiyor .panel { display: none; }
   background: var(--yuzey); color: var(--metin); font-size: 1.35rem; cursor: pointer;
 }
 .kontrol.oynat { width: 70px; height: 70px; background: var(--ana); border-color: var(--ana); color: #fff; font-size: 1.5rem; }
-.hiz { display: flex; justify-content: center; align-items: center; gap: 6px; }
-.hiz-deger { background: none; border: 0; color: var(--metin); font: inherit; font-weight: 600; min-width: 110px; height: 40px; cursor: pointer; }
+.hiz { display: flex; justify-content: center; align-items: center; gap: 4px; }
+.hiz .boy { font-family: Georgia, serif; font-weight: 700; min-width: 40px; }
+.hiz .kucuk-a { font-size: 0.85rem; }
+.hiz .buyuk-a { font-size: 1.35rem; }
+.hiz .ayrac { width: 1px; height: 22px; background: var(--kenar); margin: 0 8px; }
+.hiz-deger { background: none; border: 0; color: var(--metin); font: inherit; font-weight: 600; min-width: 100px; height: 40px; cursor: pointer; }
 
 /* ---- Kutular ---- */
 dialog {

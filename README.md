@@ -18,10 +18,11 @@ ortasında tek tek akar, göz satır boyunca gezmez. Bağımlılıksız PWA: der
 - **Gezinme:** ⇤ önceki paragraf · ‹ önceki cümle · › sonraki cümle · ⇥ sonraki paragraf.
   Sahnede yatay kaydırma cümle geri/ileri, dokunma başlat/durdur. Alttaki çubukla kitapta istenen yere,
   ☰ ile bölüme gidilir. Bölüm ve kitap için kalan süre seçili hıza göre gösterilir.
+- **Yazı boyu:** Alttaki küçük/büyük A düğmeleriyle 24–72 px arası (ayarlarda da var).
 - **Ekran açık kalır** okurken (Wake Lock). Uygulamadan çıkınca okuma durur, konum kaydedilir.
 - **İstatistik:** Bugün okunan kelime ve süre, gün serisi, ortalama gerçek hız.
 
-Klavye: boşluk başlat/durdur · ←/→ cümle · Shift+←/→ paragraf · ↑/↓ hız · Esc kitaplık.
+Klavye: boşluk başlat/durdur · ←/→ cümle · Shift+←/→ paragraf · ↑/↓ hız · +/− yazı boyu · Esc kitaplık.
 
 ## Kitap ekleme
 

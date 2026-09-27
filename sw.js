@@ -1,7 +1,7 @@
 // Çevrimdışı çalışma: uygulama kabuğunu önbelleğe al, ağ varsa tazele.
 // Ayrıca Android "Paylaş" hedefi: gelen EPUB'ı önbelleğe bırakıp uygulamaya yönlendir.
 const ON_EK = 'hizli-okuma-v';
-const AD = 'hizli-okuma-v3';
+const AD = 'hizli-okuma-v4';
 const PAYLASIM = 'hizli-okuma-paylasim';
 const DOSYALAR = [
   './', './index.html', './styles.css',
