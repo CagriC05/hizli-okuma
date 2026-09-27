@@ -83,10 +83,18 @@ function epubTuru(e) { return (e.getAttribute('epub:type') || e.getAttribute('ro
 function dipnotMu(e) {
   const t = epubTuru(e);
   if (/footnote|endnote|rearnote|noteref|doc-noteref|doc-footnote|doc-endnote/.test(t)) return true;
+  // Basılı kitabın sayfa sonu işareti; içinde genelde yalnız sayfa numarası olur.
+  if (/pagebreak|doc-pagebreak/.test(t)) return true;
   // Dipnot bağlantısı çoğu kitapta <sup><a href="#n1">1</a></sup> biçiminde gelir.
   if (e.localName === 'sup' && e.querySelector('a')) return true;
   if (e.localName === 'a' && e.parentElement?.localName === 'sup') return true;
   return false;
+}
+
+// Dönüştürülmüş kitaplarda tek başına kalan sayfa numaraları: "47", "- 47 -", "[47]", "xii".
+function sayfaNoMu(t) {
+  const c = t.replace(/[\s\-–—[\](){}.|]/g, '');
+  return /^\d{1,4}$/.test(c) || /^(?=[ivxlc])c{0,3}(xc|xl|l?x{0,3})(ix|iv|v?i{0,3})$/i.test(c);
 }
 
 function temizle(s) {
@@ -103,6 +111,7 @@ function paragraflar(belge) {
 
   function bosalt() {
     const t = temizle(tampon);
+    if (!tamponBaslik && sayfaNoMu(t)) { tampon = ''; return; }
     if (t) cikti.push(tamponBaslik ? { t, b: 1 } : { t });
     tampon = '';
     tamponBaslik = false;
